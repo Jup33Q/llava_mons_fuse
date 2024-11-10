@@ -2,7 +2,12 @@
 
 this is my attempt of using llava architecture provided by huggingface
 ## LlaVA/LlaVA_Next Architecture
-details see
+details see https://llavamonsfuse-camzzwgckxbgchhpnz8rxb.streamlit.app/
+or alternatively 
+```
+pip install streamlit
+```
+then
 ```
 streamlit run main.py
 ```
