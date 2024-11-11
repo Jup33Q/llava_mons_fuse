@@ -105,8 +105,8 @@ import requests
 from PIL import Image
 
 
-#packages for establish LlaVANext models
-from transformers import LlavaNextConfig,LlavaProcessor,LlavaNextConfig,LlavaNextForConditionalGeneration
+#packages for establish LlaVA models
+from transformers import LlavaConfig,LlavaProcessor,LlavaConfig,LlavaForConditionalGeneration
 from transformers import AutoConfig,AutoProcessor,AutoTokenizer
 from transformers import CLIPVisionConfig,CLIPConfig,CLIPImageProcessor,CLIPVisionModel
 
@@ -147,8 +147,8 @@ Step1.markdown(
 ### 3.Magics
 
 ```python
-# 1. get the fused llavaNext model
-llava_config=LlavaNextConfig(text_config=llm_config,vision_config=clip_config)
+# 1. get the fused llava model
+llava_config=LlavaConfig(text_config=llm_config,vision_config=clip_config)
 
 # 2. fuse your clip processor, tokenizer, and 'steal' a chat template
 processor=LlavaProcessor(clip_processor,llm_tokeniser)
@@ -172,7 +172,7 @@ Step2.markdown(
 import packages
 
 ```python
-from transformers import LlavaNextProcessor, LlavaNextForConditionalGeneration,GenerationConfig
+from transformers import LlavaProcessor, LlavaForConditionalGeneration,GenerationConfig
 import torch
 from PIL import Image
 import requests
@@ -181,10 +181,10 @@ from datasets import load_dataset
 ```
 ### loading models
 ```python
-processor = LlavaNextProcessor.from_pretrained('paths to your models')
+processor = LlavaProcessor.from_pretrained('paths to your models')
 # print(processor.chat_template)
 
-model = LlavaNextForConditionalGeneration.from_pretrained(r'paths to your models', torch_dtype=torch.bfloat16, low_cpu_mem_usage=True)
+model = LlavaForConditionalGeneration.from_pretrained(r'paths to your models', torch_dtype=torch.bfloat16, low_cpu_mem_usage=True)
 model.to("cuda:0")
 
 ```
@@ -253,13 +253,13 @@ Step3.markdown(
 import packages and models
 ```python
 import torch
-from transformers import LlavaNextProcessor, LlavaNextForConditionalGeneration
+from transformers import LlavaProcessor, LlavaForConditionalGeneration
 from torch.utils import tensorboard
 from trl import SFTConfig,SFTTrainer,DataCollatorForCompletionOnlyLM
 from datasets import load_dataset
 
-processor = LlavaNextProcessor.from_pretrained('/root/model_playground/cache/qwen2_5vl_8B')
-model = LlavaNextForConditionalGeneration.from_pretrained('/root/model_playground/cache/qwen2_5vl_8B', torch_dtype=torch.bfloat16, low_cpu_mem_usage=True)
+processor = LlavaProcessor.from_pretrained('/root/model_playground/cache/qwen2_5vl_8B')
+model = LlavaForConditionalGeneration.from_pretrained('/root/model_playground/cache/qwen2_5vl_8B', torch_dtype=torch.bfloat16, low_cpu_mem_usage=True)
 ```
 different dataset are used to different processing functions
 
